@@ -12,6 +12,8 @@ function openTab(id,focus=false){
     panel.classList.toggle('active',on);
   });
   if(id!=='animation') pauseAnimation();
+  if(id!=='lab') stopInclineAnimation();
+  else if(lastInclineResult&&!$('#inclineLab').hidden)setCoinAtResult(lastInclineResult);
   if(focus) $(`[data-tab="${id}"]`).focus();
   window.scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
 }
@@ -152,6 +154,222 @@ $('#recordBtn').addEventListener('click',()=>{
 });
 $('#clearTrials').addEventListener('click',()=>{trials=[];renderTrials();$('#trialPrompt').textContent='試著保持質量和推力不變，只改變表面。';});
 updateLabPreview();
+
+const labSceneTabs=$$('.lab-switch [role="tab"]');
+function openLabScene(scene,focus=false){
+  labSceneTabs.forEach(tab=>{
+    const active=tab.dataset.labScene===scene;
+    tab.setAttribute('aria-selected',String(active));
+    tab.tabIndex=active?0:-1;
+    document.getElementById(tab.getAttribute('aria-controls')).hidden=!active;
+  });
+  if(scene!=='incline')stopInclineAnimation();
+  else if(lastInclineResult)setCoinAtResult(lastInclineResult);
+  if(focus)$(`[data-lab-scene="${scene}"]`).focus();
+}
+labSceneTabs.forEach((tab,index)=>{
+  tab.addEventListener('click',()=>openLabScene(tab.dataset.labScene));
+  tab.addEventListener('keydown',event=>{
+    if(!['ArrowRight','ArrowLeft','Home','End'].includes(event.key))return;
+    event.preventDefault();
+    const next=event.key==='Home'?0:event.key==='End'?labSceneTabs.length-1:(index+(event.key==='ArrowRight'?1:-1)+labSceneTabs.length)%labSceneTabs.length;
+    openLabScene(labSceneTabs[next].dataset.labScene,true);
+  });
+});
+
+let selectedInclineSurface='medium';
+let inclinePrediction='';
+let lastInclineResult=null;
+let inclineTrials=[];
+let inclineAnimationFrame=null;
+let inclineAnimationToken=0;
+
+function rotatePoint(x,y,angleDeg,cx=360,cy=340){
+  const angle=angleDeg*Math.PI/180;
+  return{x:cx+(x-cx)*Math.cos(angle)-(y-cy)*Math.sin(angle),y:cy+(x-cx)*Math.sin(angle)+(y-cy)*Math.cos(angle)};
+}
+function coinStart(angleDeg){return rotatePoint(112,307,angleDeg);}
+function coinBottom(angleDeg){return rotatePoint(337,307,angleDeg);}
+function coinTransform(x,y,rotation){return`translate(${x.toFixed(2)} ${y.toFixed(2)}) rotate(${rotation.toFixed(2)})`;}
+function inclineValues(){return InclineModel.calculate(Number($('#angleRange').value),selectedInclineSurface);}
+function inclineOutcome(value){return value.moves?(value.distance<1?'short':'far'):'stay';}
+
+function stopInclineAnimation(){
+  inclineAnimationToken++;
+  if(inclineAnimationFrame!==null)cancelAnimationFrame(inclineAnimationFrame);
+  inclineAnimationFrame=null;
+}
+function setCoinAtStart(value){
+  const start=coinStart(value.angleDeg);
+  $('#inclineCoin').setAttribute('transform',coinTransform(start.x,start.y,value.angleDeg));
+}
+function setCoinAtResult(value){
+  if(!value.moves){setCoinAtStart(value);return;}
+  const finish={x:390+Math.min(4,value.distance)*100,y:328};
+  $('#inclineCoin').setAttribute('transform',coinTransform(finish.x,finish.y,0));
+}
+function animateInclineCoin(value){
+  stopInclineAnimation();
+  const coin=$('#inclineCoin');
+  coin.classList.remove('incline-stuck');
+  const start=coinStart(value.angleDeg);
+  if(!value.moves){
+    coin.classList.add('incline-stuck');
+    setTimeout(()=>coin.classList.remove('incline-stuck'),500);
+    return;
+  }
+  const bottom=coinBottom(value.angleDeg);
+  const landing={x:390,y:328};
+  const finish={x:390+Math.min(4,value.distance)*100,y:328};
+  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduced){setCoinAtResult(value);return;}
+  const token=inclineAnimationToken;
+  const duration=2400;
+  const begun=performance.now();
+  const mix=(a,b,t)=>a+(b-a)*t;
+  function frame(now){
+    if(token!==inclineAnimationToken)return;
+    const t=Math.min(1,(now-begun)/duration);
+    let x,y,rotation;
+    if(t<.56){
+      const p=t/.56;x=mix(start.x,bottom.x,p);y=mix(start.y,bottom.y,p);rotation=value.angleDeg;
+    }else if(t<.66){
+      const p=(t-.56)/.10;x=mix(bottom.x,landing.x,p);y=mix(bottom.y,landing.y,p);rotation=mix(value.angleDeg,0,p);
+    }else{
+      const p=(t-.66)/.34;x=mix(landing.x,finish.x,1-Math.pow(1-p,2));y=landing.y;rotation=0;
+    }
+    coin.setAttribute('transform',coinTransform(x,y,rotation));
+    if(t<1)inclineAnimationFrame=requestAnimationFrame(frame);else{inclineAnimationFrame=null;setCoinAtResult(value);}
+  }
+  inclineAnimationFrame=requestAnimationFrame(frame);
+}
+
+function updateInclineGeometry(value){
+  const angle=value.angleDeg;
+  $('#inclineRampGroup').setAttribute('transform',`rotate(${angle} 360 340)`);
+  $('#inclineForceGroup').setAttribute('transform',`rotate(${angle} 360 340)`);
+  $('#inclineRamp').setAttribute('fill',`url(#${value.surface.pattern})`);
+  const endX=360-70*Math.cos(value.angleRad);
+  const endY=340-70*Math.sin(value.angleRad);
+  $('#angleArcPath').setAttribute('d',`M290 340 A70 70 0 0 1 ${endX.toFixed(1)} ${endY.toFixed(1)}`);
+  const labelAngle=value.angleRad/2;
+  $('#svgAngleLabel').setAttribute('x',(360-92*Math.cos(labelAngle)).toFixed(1));
+  $('#svgAngleLabel').setAttribute('y',(347-92*Math.sin(labelAngle)).toFixed(1));
+  $('#svgAngleLabel').textContent=`${angle}°`;
+  setCoinAtStart(value);
+}
+function updateInclinePreview(){
+  const value=inclineValues();
+  $('#angleOut').textContent=`${value.angleDeg}°`;
+  $('#criticalAngle').textContent=`${value.criticalAngle.toFixed(1)}°`;
+  $('#downhillForce').textContent=`${value.downhill.toFixed(3)} N`;
+  $('#inclineSurfaceLabel').textContent=`斜坡：${value.surface.name} · μs ${value.surface.muS.toFixed(2)} / μk ${value.surface.muK.toFixed(2)}`;
+  $('#inclineDesc').textContent=`一枚平放的錢幣位於${value.angleDeg}度的${value.surface.name}斜坡頂端，等待釋放後測量水平滑行距離。`;
+  updateInclineGeometry(value);
+  if(!lastInclineResult){
+    $('#inclineFriction').textContent='—';
+    $('#travelDistance').textContent='—';
+    $('#inclineForceGroup').setAttribute('opacity','0');
+    $('#distanceMarker').setAttribute('opacity','0');
+  }
+}
+function markInclineChanged(){
+  stopInclineAnimation();
+  lastInclineResult=null;
+  $('#recordInclineBtn').disabled=true;
+  $('#inclineResultBadge').textContent='等待測試';
+  $('#inclineFeedback').className='feedback';
+  $('#inclineFeedback').textContent=inclinePrediction?'設定已改變，保留預測後重新測試。':'請先預測，再釋放錢幣。';
+  $('#inclineEvidence').textContent='角度增大會讓重力沿斜坡的分力增加；表面粗糙度會改變靜摩擦門檻與滑動摩擦力。';
+  updateInclinePreview();
+}
+$$('#inclineSurfaceOptions button').forEach(button=>button.addEventListener('click',()=>{
+  selectedInclineSurface=button.dataset.inclineSurface;
+  $$('#inclineSurfaceOptions button').forEach(item=>item.classList.toggle('selected',item===button));
+  markInclineChanged();
+}));
+$('#angleRange').addEventListener('input',markInclineChanged);
+$$('#inclinePredictionButtons button').forEach(button=>button.addEventListener('click',()=>{
+  inclinePrediction=button.dataset.inclinePredict;
+  $$('#inclinePredictionButtons button').forEach(item=>item.classList.toggle('selected',item===button));
+  const labels={stay:'留在斜坡',short:'滑行不到 1 m',far:'滑行至少 1 m'};
+  $('#inclineFeedback').className='feedback';
+  $('#inclineFeedback').textContent=`已預測：${labels[inclinePrediction]}。現在可以釋放錢幣。`;
+}));
+
+function runInclineLab(){
+  if(!inclinePrediction){
+    $('#inclineFeedback').className='feedback incorrect';
+    $('#inclineFeedback').textContent='請先預測錢幣會留在斜坡、滑不到 1 公尺，還是滑至少 1 公尺。';
+    $('#inclinePredictionButtons button').focus();
+    return;
+  }
+  const value=inclineValues();
+  const actual=inclineOutcome(value);
+  const correct=actual===inclinePrediction;
+  lastInclineResult=value;
+  $('#inclineResultBadge').textContent=value.moves?'滑下斜坡':'留在斜坡';
+  $('#inclineFriction').textContent=`${value.friction.toFixed(3)} N`;
+  $('#travelDistance').textContent=value.moves?`${value.distance.toFixed(2)} m`:'0.00 m';
+  $('#inclineForceGroup').setAttribute('opacity','1');
+  const downhillLength=48+value.downhill/.139*70;
+  const frictionLength=35+value.friction/.10*55;
+  $('#downhillArrow').setAttribute('d',`M150 274h${Math.min(120,downhillLength).toFixed(1)}`);
+  $('#rampFrictionArrow').setAttribute('d',`M145 300h-${Math.min(105,frictionLength).toFixed(1)}`);
+  if(value.moves){
+    const markerX=390+Math.min(4,value.distance)*100;
+    $('#distanceMarker').setAttribute('opacity','1');
+    $('#distanceMarker path').setAttribute('d',`M390 390H${markerX.toFixed(1)}`);
+    $('#distanceMarker circle').setAttribute('cx',markerX.toFixed(1));
+    $('#distanceMarkerText').setAttribute('x',((390+markerX)/2).toFixed(1));
+    $('#distanceMarkerText').textContent=`${value.distance.toFixed(2)} m`;
+  }else $('#distanceMarker').setAttribute('opacity','0');
+  $('#inclineFeedback').className=`feedback ${correct?'correct':'incorrect'}`;
+  $('#inclineFeedback').textContent=`${correct?'預測吻合！':'預測不同，請用讀數修正想法。'} ${value.angleDeg}°${value.moves?'已超過':'尚未超過'}${value.surface.name}的 ${value.criticalAngle.toFixed(1)}° 臨界角。`;
+  $('#inclineEvidence').textContent=value.moves
+    ?`重力沿坡分力 ${value.downhill.toFixed(3)} N 超過最大靜摩擦力 ${value.staticMax.toFixed(3)} N，錢幣開始滑動；到坡底速度約 ${value.bottomSpeed.toFixed(2)} m/s，接著在固定測距墊上滑行 ${value.distance.toFixed(2)} m。`
+    :`重力沿坡分力 ${value.downhill.toFixed(3)} N 沒有超過最大靜摩擦力 ${value.staticMax.toFixed(3)} N；實際靜摩擦力會平衡向下分力，所以錢幣留在原處。`;
+  $('#inclineDesc').textContent=value.moves
+    ?`測試結果：錢幣從${value.angleDeg}度的${value.surface.name}斜坡滑下，在固定測距墊上滑行${value.distance.toFixed(2)}公尺後停止。`
+    :`測試結果：錢幣在${value.angleDeg}度的${value.surface.name}斜坡上保持靜止。`;
+  $('#recordInclineBtn').disabled=false;
+  animateInclineCoin(value);
+}
+$('#runInclineBtn').addEventListener('click',runInclineLab);
+
+function resetInclineLab(){
+  stopInclineAnimation();
+  selectedInclineSurface='medium';inclinePrediction='';lastInclineResult=null;
+  $('#angleRange').value=25;
+  $$('#inclineSurfaceOptions button').forEach(item=>item.classList.toggle('selected',item.dataset.inclineSurface==='medium'));
+  $$('#inclinePredictionButtons button').forEach(item=>item.classList.remove('selected'));
+  $('#inclineResultBadge').textContent='等待預測';
+  $('#inclineFeedback').className='feedback';$('#inclineFeedback').textContent='先選擇預測，再釋放錢幣。';
+  $('#inclineEvidence').textContent='角度增大會讓重力沿斜坡的分力增加；表面粗糙度會改變靜摩擦門檻與滑動摩擦力。';
+  $('#recordInclineBtn').disabled=true;
+  updateInclinePreview();
+}
+$('#resetInclineBtn').addEventListener('click',resetInclineLab);
+
+function renderInclineTrials(){
+  const body=$('#inclineTrialBody');
+  if(!inclineTrials.length){body.innerHTML='<tr class="empty-row"><td colspan="6">尚未記錄測試</td></tr>';return;}
+  body.innerHTML=inclineTrials.map((trial,index)=>`<tr><td>${index+1}</td><td>${trial.surface.name}</td><td>${trial.angleDeg}°</td><td>${trial.criticalAngle.toFixed(1)}°</td><td>${trial.moves?'滑下':'停住'}</td><td>${trial.distance.toFixed(2)} m</td></tr>`).join('');
+  $('#inclineTrialPrompt').textContent=inclineTrials.length<3?'再記錄幾次，每次只改變角度或表面其中一項。':'比較紀錄：角度與表面分別如何改變啟動門檻和距離？';
+}
+$('#recordInclineBtn').addEventListener('click',()=>{
+  if(!lastInclineResult)return;
+  inclineTrials.push({...lastInclineResult});
+  if(inclineTrials.length>6)inclineTrials.shift();
+  renderInclineTrials();
+  $('#recordInclineBtn').disabled=true;
+  $('#inclineFeedback').textContent+=' 已加入斜坡比較表。';
+});
+$('#clearInclineTrials').addEventListener('click',()=>{
+  inclineTrials=[];renderInclineTrials();
+  $('#inclineTrialPrompt').textContent='先固定表面，只改變角度；再固定角度，只改變表面。';
+});
+updateInclinePreview();
 
 const stageText=[
   '階段 1／5：箱子尚未受到水平推力，沒有滑動趨勢；本圖先聚焦水平方向。',

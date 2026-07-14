@@ -3,14 +3,14 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="適合國小高年級的摩擦力互動數位教材，透過推箱實驗、分段動畫、生活案例與闖關理解靜摩擦力與動摩擦力。" />
+  <meta name="description" content="適合國小高年級的摩擦力互動數位教材，透過平面推箱、斜坡滑幣、分段動畫、生活案例與闖關理解靜摩擦力與動摩擦力。" />
   <meta name="theme-color" content="#123047" />
   <meta property="og:locale" content="zh_TW" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="摩擦力搜查隊" />
   <meta property="og:url" content="https://prayer168.github.io/friction/" />
   <meta property="og:title" content="摩擦力搜查隊｜互動數位教材" />
-  <meta property="og:description" content="調整表面、質量與推力，透過預測、實驗紀錄、分段動畫與闖關，用證據理解摩擦力。" />
+  <meta property="og:description" content="調整推力、斜坡角度與表面粗糙度，透過預測、實驗紀錄、分段動畫與闖關，用證據理解摩擦力。" />
   <meta property="og:image" content="https://prayer168.github.io/friction/assets/social-preview.png" />
   <meta property="og:image:secure_url" content="https://prayer168.github.io/friction/assets/social-preview.png" />
   <meta property="og:image:type" content="image/png" />
@@ -19,12 +19,13 @@
   <meta property="og:image:alt" content="摩擦力搜查隊社群預覽圖，呈現木箱、相反方向的推力與摩擦力，以及互動實驗、分段動畫、生活應用和十題闖關。" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="摩擦力搜查隊｜互動數位教材" />
-  <meta name="twitter:description" content="調整表面、質量與推力，透過預測、實驗紀錄、分段動畫與闖關，用證據理解摩擦力。" />
+  <meta name="twitter:description" content="調整推力、斜坡角度與表面粗糙度，透過預測、實驗紀錄、分段動畫與闖關，用證據理解摩擦力。" />
   <meta name="twitter:image" content="https://prayer168.github.io/friction/assets/social-preview.png" />
   <meta name="twitter:image:alt" content="摩擦力搜查隊社群預覽圖，呈現木箱與相反方向的推力、摩擦力。" />
   <title>摩擦力搜查隊｜互動數位教材</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="styles.css" />
+  <script src="incline-model.js" defer></script>
   <script src="app.js" defer></script>
 </head>
 <body>
@@ -145,10 +146,15 @@
 
     <section class="panel" id="lab" role="tabpanel" aria-labelledby="tab-lab" hidden>
       <div class="section-heading">
-        <p class="kicker">推箱實驗室</p>
-        <h2>先預測，再用力的數據破案</h2>
-        <p>改變表面、箱子質量與推力。每次只比較一個變因，才能讓證據說話。</p>
+        <p class="kicker">雙場景摩擦實驗室</p>
+        <h2>平面推箱，或讓錢幣滑下斜坡</h2>
+        <p>先選實驗、做預測，再一次只改變一個變因，從力與距離的數據找規律。</p>
       </div>
+      <div class="lab-switch" role="tablist" aria-label="選擇實驗場景">
+        <button type="button" role="tab" id="flatLabTab" aria-controls="flatLab" aria-selected="true" data-lab-scene="flat"><span>實驗 A</span>平面推箱</button>
+        <button type="button" role="tab" id="inclineLabTab" aria-controls="inclineLab" aria-selected="false" tabindex="-1" data-lab-scene="incline"><span>實驗 B</span>斜坡滑幣</button>
+      </div>
+      <div id="flatLab" class="lab-scene" role="tabpanel" aria-labelledby="flatLabTab">
       <div class="lab-layout">
         <aside class="controls" aria-label="實驗控制">
           <fieldset>
@@ -218,6 +224,91 @@
         <div class="table-wrap"><table><thead><tr><th>次數</th><th>表面</th><th>質量</th><th>推力</th><th>靜摩擦上限</th><th>結果</th></tr></thead><tbody id="trialBody"><tr class="empty-row"><td colspan="6">尚未記錄測試</td></tr></tbody></table></div>
         <div class="notebook-actions"><button id="clearTrials" class="secondary">清除紀錄</button><p id="trialPrompt">試著保持質量和推力不變，只改變表面。</p></div>
       </section>
+      </div>
+
+      <div id="inclineLab" class="lab-scene" role="tabpanel" aria-labelledby="inclineLabTab" hidden>
+        <div class="lab-task-strip"><strong>今天要找：</strong><span>斜坡越陡一定滑越遠嗎？表面越粗糙又會發生什麼變化？</span></div>
+        <div class="lab-layout incline-layout">
+          <aside class="controls" aria-label="斜坡滑幣實驗控制">
+            <fieldset>
+              <legend>1. 選擇斜坡表面</legend>
+              <div class="segmented" id="inclineSurfaceOptions">
+                <button type="button" data-incline-surface="smooth">光滑面 <small>μs 0.12</small></button>
+                <button type="button" data-incline-surface="medium" class="selected">一般面 <small>μs 0.30</small></button>
+                <button type="button" data-incline-surface="rough">粗糙面 <small>μs 0.50</small></button>
+              </div>
+            </fieldset>
+            <label class="range-label" for="angleRange"><span>2. 斜坡角度</span><output id="angleOut">25°</output></label>
+            <input id="angleRange" type="range" min="5" max="45" step="1" value="25" aria-describedby="angleHint" />
+            <p id="angleHint" class="control-hint">斜坡長度固定為 1.20 m；調大角度時，高度也會增加。</p>
+            <fieldset>
+              <legend>3. 預測滑行距離</legend>
+              <div class="prediction incline-prediction" id="inclinePredictionButtons">
+                <button type="button" data-incline-predict="stay">留在斜坡</button>
+                <button type="button" data-incline-predict="short">不到 1 m</button>
+                <button type="button" data-incline-predict="far">至少 1 m</button>
+              </div>
+            </fieldset>
+            <button class="primary full" id="runInclineBtn">釋放錢幣</button>
+            <button class="secondary full" id="resetInclineBtn">重設斜坡</button>
+            <p class="model-note">教學模型：錢幣平放滑動、不滾動；只改變斜坡角度與斜坡表面。下方測距墊固定為同一材質（μk 0.22）。</p>
+          </aside>
+          <div>
+            <div class="simulation incline-simulation" id="inclineSimulation">
+              <div class="sim-status"><span>斜坡測試狀態</span><b id="inclineResultBadge">等待預測</b></div>
+              <svg id="inclineSvg" viewBox="0 0 860 520" role="img" aria-labelledby="inclineTitle inclineDesc">
+                <title id="inclineTitle">可調角度與粗糙度的斜坡滑幣模擬</title>
+                <desc id="inclineDesc">一枚平放的錢幣位於二十五度的一般表面斜坡頂端，等待釋放後測量水平滑行距離。</desc>
+                <defs>
+                  <pattern id="inclineSmooth" width="34" height="18" patternUnits="userSpaceOnUse"><path d="M0 9h34" stroke="#a9c5ce" stroke-width="2"/></pattern>
+                  <pattern id="inclineMedium" width="34" height="20" patternUnits="userSpaceOnUse"><path d="M0 15 8 8l8 6 9-9 9 11" fill="none" stroke="#718995" stroke-width="3"/></pattern>
+                  <pattern id="inclineRough" width="34" height="23" patternUnits="userSpaceOnUse"><path d="M0 19 7 4l9 15 9-17 9 18" fill="none" stroke="#536a78" stroke-width="5"/></pattern>
+                  <linearGradient id="coinMetal" x1="0" x2="1"><stop stop-color="#ffe09a"/><stop offset=".55" stop-color="#f4b942"/><stop offset="1" stop-color="#c9781e"/></linearGradient>
+                  <marker id="inclineArrow" markerUnits="userSpaceOnUse" markerWidth="22" markerHeight="22" refX="19" refY="11" orient="auto"><path d="M0 0 22 11 0 22Z" fill="context-stroke"/></marker>
+                </defs>
+                <rect x="22" y="38" width="816" height="424" rx="22" fill="#f8fbfa" stroke="#c7d7da" stroke-width="2"/>
+                <g id="inclineRampGroup" transform="rotate(25 360 340)">
+                  <rect id="inclineRamp" x="85" y="322" width="275" height="36" rx="5" fill="url(#inclineMedium)" stroke="#123047" stroke-width="6"/>
+                  <path d="M110 322v-18M160 322v-13M210 322v-18M260 322v-13M310 322v-18" stroke="#123047" stroke-width="3" opacity=".45"/>
+                </g>
+                <path d="M360 340h455v85H360Z" fill="#dfe9e7" stroke="#123047" stroke-width="6"/>
+                <path d="M390 340v85M490 340v85M590 340v85M690 340v85M790 340v85" stroke="#9db2b6" stroke-width="2"/>
+                <g class="distance-labels" aria-hidden="true"><text x="390" y="452">0 m</text><text x="490" y="452">1 m</text><text x="590" y="452">2 m</text><text x="690" y="452">3 m</text><text x="790" y="452">4 m</text></g>
+                <g id="inclineAngleArc" aria-hidden="true"><path id="angleArcPath" d="M290 340 A70 70 0 0 0 296.6 310.4"/><text id="svgAngleLabel" x="286" y="304">25°</text></g>
+                <g id="inclineForceGroup" transform="rotate(25 360 340)" opacity="0" aria-hidden="true">
+                  <path id="downhillArrow" d="M150 274h95"/><text x="145" y="258">重力沿坡分力</text>
+                  <path id="rampFrictionArrow" d="M145 300h-72"/><text x="68" y="285">摩擦力</text>
+                </g>
+                <g id="inclineCoin" transform="translate(112 200) rotate(25)">
+                  <ellipse cx="0" cy="3" rx="27" ry="12" fill="#9d641d" opacity=".35"/>
+                  <rect x="-27" y="-12" width="54" height="20" rx="10" fill="url(#coinMetal)" stroke="#123047" stroke-width="5"/>
+                  <path d="M-14-3h28" stroke="#fff3c4" stroke-width="3" stroke-linecap="round"/>
+                </g>
+                <g id="distanceMarker" opacity="0" aria-hidden="true"><path d="M390 390h100"/><circle cx="490" cy="390" r="7"/><text id="distanceMarkerText" x="440" y="382" text-anchor="middle">0.00 m</text></g>
+                <text id="inclineSurfaceLabel" x="70" y="492">斜坡：一般面 · μs 0.30 / μk 0.22</text>
+                <text x="575" y="492">測距墊固定 · μk 0.22</text>
+              </svg>
+              <div class="readouts incline-readouts" aria-label="斜坡實驗讀數">
+                <div><span>開始滑動臨界角</span><b id="criticalAngle">16.7°</b></div>
+                <div><span>沿斜坡向下分力</span><b id="downhillForce">0.083 N</b></div>
+                <div><span>斜坡摩擦力</span><b id="inclineFriction">—</b></div>
+                <div><span>水平滑行距離</span><b id="travelDistance">—</b></div>
+              </div>
+            </div>
+            <div id="inclineFeedback" class="feedback" aria-live="polite">先選擇預測，再釋放錢幣。</div>
+            <div class="evidence-box">
+              <div><p class="kicker">證據解讀</p><p id="inclineEvidence">角度增大會讓重力沿斜坡的分力增加；表面粗糙度會改變靜摩擦門檻與滑動摩擦力。</p></div>
+              <button id="recordInclineBtn" class="secondary" disabled>記錄這次</button>
+            </div>
+          </div>
+        </div>
+        <section class="notebook" aria-labelledby="inclineNotebookTitle">
+          <div><p class="kicker">斜坡比較表</p><h3 id="inclineNotebookTitle">最多保留 6 次測試，先固定一個變因再比較</h3></div>
+          <div class="table-wrap"><table><thead><tr><th>次數</th><th>斜坡表面</th><th>角度</th><th>臨界角</th><th>結果</th><th>水平距離</th></tr></thead><tbody id="inclineTrialBody"><tr class="empty-row"><td colspan="6">尚未記錄測試</td></tr></tbody></table></div>
+          <div class="notebook-actions"><button id="clearInclineTrials" class="secondary">清除紀錄</button><p id="inclineTrialPrompt">先固定表面，只改變角度；再固定角度，只改變表面。</p></div>
+        </section>
+        <div class="observe-question incline-question"><strong>觀察挑戰</strong><p>找出一組「角度相同，但表面不同」的紀錄：哪個表面讓錢幣滑得較遠？請用摩擦力與臨界角解釋。</p></div>
+      </div>
     </section>
 
     <section class="panel" id="animation" role="tabpanel" aria-labelledby="tab-animation" hidden>
@@ -285,10 +376,11 @@
         <a href="https://phet.colorado.edu/zh_TW/simulations/forces-and-motion-basics" target="_blank" rel="noopener"><span>互動模擬</span><h3>PhET｜力與運動：基礎</h3><p>調整摩擦與推力，觀察力箭頭、合力、速度與加速度。</p><small>來源：University of Colorado Boulder　程度：學生　查核：2026-07-14</small></a>
         <a href="https://hyperphysics.phy-astr.gsu.edu/hbase/frict.html" target="_blank" rel="noopener"><span>大學物理資料庫</span><h3>HyperPhysics｜Friction</h3><p>摩擦係數、正向力與靜摩擦／動摩擦模型的精簡圖解。</p><small>來源：Georgia State University　程度：教師／進階　查核：2026-07-14</small></a>
         <a href="https://www.purdue.edu/hardware-store-science/wp-content/uploads/2021/09/9.0-Contact-Forces-Sliding-Friction_STEM-Content.pdf" target="_blank" rel="noopener"><span>STEM 教學資源</span><h3>Purdue｜Sliding Friction</h3><p>以實驗比較接觸力、靜摩擦與滑動摩擦的教學資料。</p><small>來源：Purdue University　程度：教師　查核：2026-07-14</small></a>
+        <a href="https://openstax.org/books/physics/pages/5-4-inclined-planes" target="_blank" rel="noopener"><span>斜坡力學</span><h3>OpenStax｜Inclined Planes</h3><p>從重力沿坡分力、正向力與靜／動摩擦，解釋物體何時開始滑下斜坡。</p><small>來源：OpenStax　程度：教師／進階　查核：2026-07-14</small></a>
       </div>
       <aside class="teacher-note">
         <h3>教師使用建議</h3>
-        <ul><li>建議 35–45 分鐘：概念探索 8 分鐘、變因實驗 15 分鐘、動畫與應用 10 分鐘、闖關 10 分鐘。</li><li>請學生至少記錄三次測試，且每次只改變一個變因。</li><li>延伸實作可用彈簧秤拉動同一物體，比較「剛開始滑動」與「穩定滑動」的讀數。</li></ul>
+        <ul><li>建議 40–50 分鐘：概念探索 8 分鐘、平面與斜坡變因實驗 20 分鐘、動畫與應用 10 分鐘、闖關 10 分鐘。</li><li>請學生在每個實驗至少記錄三次測試，且每次只改變一個變因。</li><li>斜坡實驗可分兩輪：先固定表面改角度，再固定角度改表面，避免同時改兩項後無法判斷原因。</li><li>延伸實作可用彈簧秤拉動同一物體，比較「剛開始滑動」與「穩定滑動」的讀數。</li></ul>
         <p><strong>安全：</strong>實物實驗不要拉動大型家具，不在樓梯、濕滑地面或車道測試摩擦。</p>
       </aside>
       <footer>摩擦力搜查隊 · 教學模型已清楚標示簡化條件 · 無外部圖片資產</footer>

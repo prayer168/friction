@@ -5,6 +5,6 @@ const root=resolve(import.meta.dirname,'..');
 const dist=resolve(root,'dist');
 await rm(dist,{recursive:true,force:true});
 await mkdir(dist,{recursive:true});
-for(const file of ['index.html','styles.css','app.js'])await cp(resolve(root,file),resolve(dist,file));
+for(const file of ['index.html','styles.css','incline-model.js','app.js'])await cp(resolve(root,file),resolve(dist,file));
 await cp(resolve(root,'assets'),resolve(dist,'assets'),{recursive:true});
 console.log('Built static lesson to dist/');

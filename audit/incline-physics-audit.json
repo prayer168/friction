@@ -1,0 +1,305 @@
+{
+  "checkedDate": "2026-07-14",
+  "system": "flat coin sliding without rolling on a fixed-length incline, then stopping on a fixed horizontal measurement mat",
+  "pass": 59,
+  "fail": 0,
+  "total": 59,
+  "tolerance": 1e-9,
+  "checks": [
+    {
+      "name": "smooth：臨界角以下保持靜止",
+      "pass": true,
+      "details": "5° → 靜止"
+    },
+    {
+      "name": "smooth：臨界角等值保持靜止",
+      "pass": true,
+      "details": "6.842773° → 靜止"
+    },
+    {
+      "name": "smooth：臨界角以上開始滑動",
+      "pass": true,
+      "details": "7° → 滑動"
+    },
+    {
+      "name": "medium：臨界角以下保持靜止",
+      "pass": true,
+      "details": "16° → 靜止"
+    },
+    {
+      "name": "medium：臨界角等值保持靜止",
+      "pass": true,
+      "details": "16.699244° → 靜止"
+    },
+    {
+      "name": "medium：臨界角以上開始滑動",
+      "pass": true,
+      "details": "17° → 滑動"
+    },
+    {
+      "name": "rough：臨界角以下保持靜止",
+      "pass": true,
+      "details": "26° → 靜止"
+    },
+    {
+      "name": "rough：臨界角等值保持靜止",
+      "pass": true,
+      "details": "26.565051° → 靜止"
+    },
+    {
+      "name": "rough：臨界角以上開始滑動",
+      "pass": true,
+      "details": "27° → 滑動"
+    },
+    {
+      "name": "smooth 25°：normal",
+      "pass": true,
+      "details": "actual=0.177636326, expected=0.177636326"
+    },
+    {
+      "name": "smooth 25°：downhill",
+      "pass": true,
+      "details": "actual=0.082833179, expected=0.082833179"
+    },
+    {
+      "name": "smooth 25°：staticMax",
+      "pass": true,
+      "details": "actual=0.021316359, expected=0.021316359"
+    },
+    {
+      "name": "smooth 25°：friction",
+      "pass": true,
+      "details": "actual=0.014210906, expected=0.014210906"
+    },
+    {
+      "name": "smooth 25°：acceleration",
+      "pass": true,
+      "details": "actual=3.431113660, expected=3.431113660"
+    },
+    {
+      "name": "smooth 25°：bottomSpeed",
+      "pass": true,
+      "details": "actual=2.869611957, expected=2.869611957"
+    },
+    {
+      "name": "smooth 25°：distance",
+      "pass": true,
+      "details": "actual=1.909710757, expected=1.909710757"
+    },
+    {
+      "name": "smooth 25°：criticalAngle",
+      "pass": true,
+      "details": "actual=6.842773413, expected=6.842773413"
+    },
+    {
+      "name": "smooth 25°：運動分類",
+      "pass": true,
+      "details": "actual=true, expected=true"
+    },
+    {
+      "name": "medium 25°：normal",
+      "pass": true,
+      "details": "actual=0.177636326, expected=0.177636326"
+    },
+    {
+      "name": "medium 25°：downhill",
+      "pass": true,
+      "details": "actual=0.082833179, expected=0.082833179"
+    },
+    {
+      "name": "medium 25°：staticMax",
+      "pass": true,
+      "details": "actual=0.053290898, expected=0.053290898"
+    },
+    {
+      "name": "medium 25°：friction",
+      "pass": true,
+      "details": "actual=0.039079992, expected=0.039079992"
+    },
+    {
+      "name": "medium 25°：acceleration",
+      "pass": true,
+      "details": "actual=2.187659376, expected=2.187659376"
+    },
+    {
+      "name": "medium 25°：bottomSpeed",
+      "pass": true,
+      "details": "actual=2.291371315, expected=2.291371315"
+    },
+    {
+      "name": "medium 25°：distance",
+      "pass": true,
+      "details": "actual=1.217621174, expected=1.217621174"
+    },
+    {
+      "name": "medium 25°：criticalAngle",
+      "pass": true,
+      "details": "actual=16.699244234, expected=16.699244234"
+    },
+    {
+      "name": "medium 25°：運動分類",
+      "pass": true,
+      "details": "actual=true, expected=true"
+    },
+    {
+      "name": "rough 25°：normal",
+      "pass": true,
+      "details": "actual=0.177636326, expected=0.177636326"
+    },
+    {
+      "name": "rough 25°：downhill",
+      "pass": true,
+      "details": "actual=0.082833179, expected=0.082833179"
+    },
+    {
+      "name": "rough 25°：staticMax",
+      "pass": true,
+      "details": "actual=0.088818163, expected=0.088818163"
+    },
+    {
+      "name": "rough 25°：friction",
+      "pass": true,
+      "details": "actual=0.082833179, expected=0.082833179"
+    },
+    {
+      "name": "rough 25°：acceleration",
+      "pass": true,
+      "details": "actual=0.000000000, expected=0.000000000"
+    },
+    {
+      "name": "rough 25°：bottomSpeed",
+      "pass": true,
+      "details": "actual=0.000000000, expected=0.000000000"
+    },
+    {
+      "name": "rough 25°：distance",
+      "pass": true,
+      "details": "actual=0.000000000, expected=0.000000000"
+    },
+    {
+      "name": "rough 25°：criticalAngle",
+      "pass": true,
+      "details": "actual=26.565051177, expected=26.565051177"
+    },
+    {
+      "name": "rough 25°：運動分類",
+      "pass": true,
+      "details": "actual=false, expected=false"
+    },
+    {
+      "name": "smooth 45°：normal",
+      "pass": true,
+      "details": "actual=0.138592929, expected=0.138592929"
+    },
+    {
+      "name": "smooth 45°：downhill",
+      "pass": true,
+      "details": "actual=0.138592929, expected=0.138592929"
+    },
+    {
+      "name": "smooth 45°：staticMax",
+      "pass": true,
+      "details": "actual=0.016631151, expected=0.016631151"
+    },
+    {
+      "name": "smooth 45°：friction",
+      "pass": true,
+      "details": "actual=0.011087434, expected=0.011087434"
+    },
+    {
+      "name": "smooth 45°：acceleration",
+      "pass": true,
+      "details": "actual=6.375274739, expected=6.375274739"
+    },
+    {
+      "name": "smooth 45°：bottomSpeed",
+      "pass": true,
+      "details": "actual=3.911605728, expected=3.911605728"
+    },
+    {
+      "name": "smooth 45°：distance",
+      "pass": true,
+      "details": "actual=3.548390393, expected=3.548390393"
+    },
+    {
+      "name": "smooth 45°：criticalAngle",
+      "pass": true,
+      "details": "actual=6.842773413, expected=6.842773413"
+    },
+    {
+      "name": "smooth 45°：運動分類",
+      "pass": true,
+      "details": "actual=true, expected=true"
+    },
+    {
+      "name": "rough 45°：normal",
+      "pass": true,
+      "details": "actual=0.138592929, expected=0.138592929"
+    },
+    {
+      "name": "rough 45°：downhill",
+      "pass": true,
+      "details": "actual=0.138592929, expected=0.138592929"
+    },
+    {
+      "name": "rough 45°：staticMax",
+      "pass": true,
+      "details": "actual=0.069296465, expected=0.069296465"
+    },
+    {
+      "name": "rough 45°：friction",
+      "pass": true,
+      "details": "actual=0.052665313, expected=0.052665313"
+    },
+    {
+      "name": "rough 45°：acceleration",
+      "pass": true,
+      "details": "actual=4.296380802, expected=4.296380802"
+    },
+    {
+      "name": "rough 45°：bottomSpeed",
+      "pass": true,
+      "details": "actual=3.211123468, expected=3.211123468"
+    },
+    {
+      "name": "rough 45°：distance",
+      "pass": true,
+      "details": "actual=2.391306569, expected=2.391306569"
+    },
+    {
+      "name": "rough 45°：criticalAngle",
+      "pass": true,
+      "details": "actual=26.565051177, expected=26.565051177"
+    },
+    {
+      "name": "rough 45°：運動分類",
+      "pass": true,
+      "details": "actual=true, expected=true"
+    },
+    {
+      "name": "smooth：角度增加時滑行距離增加",
+      "pass": true,
+      "details": "30°=2.349 m, 40°=3.172 m"
+    },
+    {
+      "name": "medium：角度增加時滑行距離增加",
+      "pass": true,
+      "details": "30°=1.688 m, 40°=2.587 m"
+    },
+    {
+      "name": "rough：角度增加時滑行距離增加",
+      "pass": true,
+      "details": "30°=0.932 m, 40°=1.918 m"
+    },
+    {
+      "name": "同為 30°：光滑面比一般面滑得遠",
+      "pass": true,
+      "details": "2.349 m > 1.688 m"
+    },
+    {
+      "name": "同為 30°：一般面比粗糙面滑得遠",
+      "pass": true,
+      "details": "1.688 m > 0.932 m"
+    }
+  ]
+}

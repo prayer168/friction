@@ -1,6 +1,6 @@
 # 摩擦力搜查隊
 
-適合國小高年級的摩擦力互動數位教材。學生會先預測再操作推箱模型，記錄控制變因的測試結果，逐格觀察靜摩擦轉為動摩擦，並以八個生活案例與十題闖關整理證據。
+適合國小高年級的摩擦力互動數位教材。學生會先預測再操作平面推箱與斜坡滑幣模型，記錄控制變因的測試結果，逐格觀察靜摩擦轉為動摩擦，並以八個生活案例與十題闖關整理證據。
 
 公開教材：https://prayer168.github.io/friction/
 
@@ -25,6 +25,7 @@ npm.cmd run serve
 
 ```powershell
 npm.cmd test
+npm.cmd run audit:physics
 npm.cmd run build
 npm.cmd audit
 ```
@@ -33,4 +34,4 @@ npm.cmd audit
 
 ## 技術與資產
 
-零外部執行期相依。核心視覺與動畫使用原生 HTML／CSS／SVG／JavaScript；生活應用頁的八張情境插圖使用 OpenAI Image 2.0 依教材需求生成並最佳化為專案內 WebP。
+零外部執行期相依。核心視覺、推箱與斜坡滑幣動畫使用原生 HTML／CSS／SVG／JavaScript；斜坡物理模型另有 59 項可重跑數值稽核。生活應用頁的八張情境插圖使用 OpenAI Image 2.0 依教材需求生成並最佳化為專案內 WebP。

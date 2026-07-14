@@ -8,8 +8,9 @@
 
 | 項目 | 結果 |
 |---|---|
-| `npm.cmd test`：頁籤、案例、題目、互動、無障礙、來源、圖片資產、社群 metadata 與占位掃描 | 通過（17/17） |
-| `npm.cmd run build`：靜態正式建置 | 通過；`dist/` 含 HTML、CSS、JS、SVG 與 WebP 資產 |
+| `npm.cmd test`：頁籤、雙實驗、案例、題目、無障礙、來源、圖片資產、社群 metadata 與占位掃描 | 通過（19/19） |
+| `npm.cmd run audit:physics`：斜坡臨界角、受力、加速度、速度、距離與趨勢 | 通過（59/59） |
+| `npm.cmd run build`：靜態正式建置 | 通過；`dist/` 含 HTML、CSS、`incline-model.js`、SVG 與 WebP 資產 |
 | `npm.cmd audit`：套件安全檢查 | 通過；0 個弱點 |
 | `git diff --cached --check`：空白與衝突標記 | 通過 |
 
@@ -68,7 +69,22 @@
 - 專案未使用外部圖片 URL，公開教材不依賴第三方圖片服務。
 - 目視證據：`docs/screenshots/applications-image2-desktop.png`、`applications-image2-tablet.png`、`applications-image2-mobile.png`。
 
+## 1.2.0 斜坡滑幣驗證
+
+- 物理模型：錢幣平放且不滾動；斜坡長 1.20 m、角度 5°–45°，三種斜坡表面；水平測距墊固定為 `μk=0.22`。
+- 獨立數值稽核 59/59 通過：三種表面各測臨界角下方、臨界角等值與上方，並核對 `N`、`mg sinθ`、最大靜摩擦、動摩擦、加速度、坡底速度與停止距離。
+- 關鍵結果：25°一般面滑行 1.22 m；25°粗糙面停住；30°粗糙面滑行 0.93 m；45°光滑面滑行 3.55 m。
+- 趨勢檢查：固定表面時，30°到 40°的滑行距離增加；固定 30°時，光滑面距離大於一般面，一般面大於粗糙面。
+- 互動狀態：必須先預測；設定變更會清除舊結果；最多記錄 6 次；切換場景或主頁籤會停止動畫，返回時恢復正確結果位置。
+- 無障礙：雙實驗頁籤支援 ArrowLeft、ArrowRight、Home、End；`aria-selected`、`hidden`、即時回饋與 SVG 描述同步。
+- 降低動畫：媒體查詢命中時，錢幣直接抵達計算後的停止位置，完整讀數與紀錄功能仍保留。
+- 1440×1000、768×1024、390×844 均為 `scrollWidth=clientWidth`；手機紀錄表只在自身容器橫向捲動。
+- 本機瀏覽器首頁、CSS、`incline-model.js`、`app.js`、favicon 均回應 HTTP 200；主控台 0 個錯誤、無錯誤覆蓋層。
+- 目視證據：`docs/screenshots/incline-initial-desktop.png`、`incline-result-desktop.png`、`incline-result-tablet.png`、`incline-result-mobile.png`。
+- 完整物理稽核：`audit/incline-physics-audit.md` 與 `audit/incline-physics-audit.json`；重跑指令為 `npm.cmd run audit:physics`。
+
 ## 已知限制
 
 - 教材是比較用乾燥滑動模型，不替代真實材料量測。
+- 斜坡模型不處理錢幣滾動、彈跳、空氣阻力、坡底碰撞損失或材料係數隨速度改變；動畫時間為方便觀察的視覺時間。
 - 未加入音效，避免課堂干擾並降低認知負荷。

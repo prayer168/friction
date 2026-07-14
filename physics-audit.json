@@ -1,0 +1,39 @@
+{
+  "system": "flat coin sliding without rolling on a fixed-length incline, then stopping on a fixed horizontal measurement mat",
+  "entry": "index.html",
+  "modelScript": "incline-model.js",
+  "modelGlobal": "InclineModel",
+  "selectors": {
+    "sceneTab": "#inclineLabTab",
+    "angleSlider": "#angleRange",
+    "surfaceButtons": "#inclineSurfaceOptions",
+    "runButton": "#runInclineBtn",
+    "distanceReadout": "#travelDistance",
+    "coin": "#inclineCoin"
+  },
+  "assumptions": {
+    "gravity": 9.8,
+    "coinMassKg": 0.02,
+    "rampLengthM": 1.2,
+    "landingKineticCoefficient": 0.22,
+    "rolling": false
+  },
+  "surfaces": {
+    "smooth": {"staticCoefficient": 0.12, "kineticCoefficient": 0.08},
+    "medium": {"staticCoefficient": 0.30, "kineticCoefficient": 0.22},
+    "rough": {"staticCoefficient": 0.50, "kineticCoefficient": 0.38}
+  },
+  "boundarySamples": [
+    {"surface": "smooth", "belowDeg": 5, "aboveDeg": 7},
+    {"surface": "medium", "belowDeg": 16, "aboveDeg": 17},
+    {"surface": "rough", "belowDeg": 26, "aboveDeg": 27}
+  ],
+  "numericSamples": [
+    {"surface": "smooth", "angleDeg": 25},
+    {"surface": "medium", "angleDeg": 25},
+    {"surface": "rough", "angleDeg": 25},
+    {"surface": "smooth", "angleDeg": 45},
+    {"surface": "rough", "angleDeg": 45}
+  ],
+  "tolerance": 1e-9
+}
