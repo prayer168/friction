@@ -4,6 +4,8 @@
 
 公開教材：https://prayer168.github.io/friction/
 
+原始碼：https://github.com/prayer168/friction
+
 ## 學習重點
 
 - 摩擦力反抗接觸面的相對滑動或滑動趨勢。

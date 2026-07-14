@@ -8,7 +8,7 @@
 
 | 項目 | 結果 |
 |---|---|
-| `npm.cmd test`：頁籤、案例、題目、互動、無障礙、來源與占位掃描 | 通過（14/14） |
+| `npm.cmd test`：頁籤、案例、題目、互動、無障礙、來源、社群 metadata 與占位掃描 | 通過（16/16） |
 | `npm.cmd run build`：靜態正式建置 | 通過；`dist/` 含 HTML、CSS、JS、SVG 資產 |
 | `npm.cmd audit`：套件安全檢查 | 通過；0 個弱點 |
 | `git diff --cached --check`：空白與衝突標記 | 通過 |
@@ -42,8 +42,21 @@
 - `docs/screenshots/animation-stage5-desktop.png`：動摩擦階段、能量轉移線索與控制。
 - `docs/screenshots/applications-desktop.png`、`applications-tablet.png`：八案例與翻卡狀態。
 - `docs/screenshots/quiz-desktop.png`、`quiz-complete-desktop.png`：作答鎖定、即時回饋與完成總結。
+- `docs/screenshots/public-lab-mobile.png`：GitHub Pages 公開版 390×844 推箱互動結果。
 
 初次目視發現推箱位移後，SVG 力箭頭的預設 marker 隨線寬放大並遮住箱體。已改為 `markerUnits="userSpaceOnUse"`、縮小示意位移，讓箭頭與箱子同步後以相同步驟重測通過。
+
+## 1.0.1 公開部署驗證
+
+- Repository：https://github.com/prayer168/friction
+- GitHub Pages：https://prayer168.github.io/friction/
+- Pages 來源：`main` 分支根目錄；狀態 `built`；HTTPS 強制啟用。
+- 公開首頁、`styles.css`、`app.js`、`assets/favicon.svg`、`assets/social-preview.png`、`facebook-post.txt` 均回應 HTTP 200。
+- 社群縮圖公開回應 `image/png`，檔案 149,609 bytes，尺寸精確為 1200×630。
+- 公開 HTML 的 `og:url`、`og:image` 與 `twitter:card=summary_large_image` 均為正式絕對 HTTPS 值。
+- 公開版 390×844 逐頁檢查：七頁籤皆 `scrollWidth=clientWidth=390`，無頁面水平溢出。
+- 公開推箱實驗：4 kg、一般面、20 N 推力，結果為「開始滑動」、動摩擦力 10.0 N、合力 10.0 N。
+- 公開版主控台 0 個錯誤、無錯誤覆蓋層；首頁、CSS、JavaScript 與 favicon 的瀏覽器請求均回應 200。
 
 ## 已知限制
 
