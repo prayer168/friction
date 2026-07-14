@@ -33,4 +33,4 @@ npm.cmd audit
 
 ## 技術與資產
 
-零外部執行期相依。視覺與動畫使用原生 HTML／CSS／SVG／JavaScript，未使用外部圖片資產。
+零外部執行期相依。核心視覺與動畫使用原生 HTML／CSS／SVG／JavaScript；生活應用頁的八張情境插圖使用 OpenAI Image 2.0 依教材需求生成並最佳化為專案內 WebP。

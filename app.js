@@ -190,16 +190,16 @@ $('#revealObservation').addEventListener('click',()=>{
 });
 
 const applications=[
-  {title:'走路不打滑',key:'需要增大',front:'腳向後推地面，什麼力幫助身體向前？',back:'地面對鞋底的靜摩擦力可向前作用，讓人能加速前進。鞋底抓地不足時容易滑倒。',icon:'walk'},
-  {title:'腳踏車煞車',key:'需要增大',front:'握下煞車把手，哪個接觸位置改變？',back:'煞車塊更緊壓輪圈或碟盤，摩擦力讓轉動減慢，機械能主要轉成內能。',icon:'brake'},
-  {title:'雨鞋排水紋',key:'維持抓地',front:'鞋底溝紋在濕地面上有什麼任務？',back:'溝紋幫助排開接觸面的水，讓鞋底較能接觸地面；效果仍受材料、磨耗與路況影響。',icon:'tread'},
-  {title:'門鉸鏈上油',key:'需要減小',front:'為什麼加潤滑油後，門比較好開？',back:'潤滑層改變兩表面的直接接觸與剪切情況，通常可減少摩擦與磨耗。',icon:'oil'},
-  {title:'輪胎抓地',key:'需要適當增大',front:'車輛轉彎、加速與煞車都需要什麼？',back:'輪胎與路面間的摩擦提供改變速度方向或大小所需的水平力；濕滑時應降低速度。',icon:'tire'},
-  {title:'橡皮擦鉛筆字',key:'摩擦會磨耗',front:'擦拭後為什麼會出現橡皮屑？',back:'橡皮與紙面摩擦，帶走部分石墨，也造成材料磨耗並產生少量熱。',icon:'eraser'},
-  {title:'攀岩用粉袋',key:'改善接觸',front:'手汗多時，攀岩者為何使用粉末？',back:'攀岩粉可吸收部分水分，改善手與岩點的接觸和抓握；仍須依安全裝備與專業指導操作。',icon:'chalk'},
-  {title:'搬運用滾輪',key:'改變接觸方式',front:'重物放上滾輪後，為什麼常較省力？',back:'把大量滑動接觸改為滾動，許多情況下阻力較小；軸承也能降低部件間的滑動摩擦。',icon:'roller'}
+  {title:'走路不打滑',key:'需要增大',front:'腳向後推地面，什麼力幫助身體向前？',back:'地面對鞋底的靜摩擦力可向前作用，讓人能加速前進。鞋底抓地不足時容易滑倒。',icon:'walk',alt:'運動鞋鞋底緊貼石板路面，鞋跟後方有輕微動作線，呈現走路時的接觸。'},
+  {title:'腳踏車煞車',key:'需要增大',front:'握下煞車把手，哪個接觸位置改變？',back:'煞車塊更緊壓輪圈或碟盤，摩擦力讓轉動減慢，機械能主要轉成內能。',icon:'brake',alt:'腳踏車碟煞特寫，煞車卡鉗與兩側來令片位在金屬碟盤的接觸處。'},
+  {title:'雨鞋排水紋',key:'維持抓地',front:'鞋底溝紋在濕地面上有什麼任務？',back:'溝紋幫助排開接觸面的水，讓鞋底較能接觸地面；效果仍受材料、磨耗與路況影響。',icon:'tread',alt:'雨鞋深溝鞋底壓在濕地面上，少量水沿鞋底溝槽向外排出。'},
+  {title:'門鉸鏈上油',key:'需要減小',front:'為什麼加潤滑油後，門比較好開？',back:'潤滑層改變兩表面的直接接觸與剪切情況，通常可減少摩擦與磨耗。',icon:'oil',alt:'潤滑油瓶尖端把一滴油準確滴在門鉸鏈中央轉軸接縫。'},
+  {title:'輪胎抓地',key:'需要適當增大',front:'車輛轉彎、加速與煞車都需要什麼？',back:'輪胎與路面間的摩擦提供改變速度方向或大小所需的水平力；濕滑時應降低速度。',icon:'tire',alt:'有深溝胎紋的車輪接觸微濕路面，水滴分布在胎紋與接觸區附近。'},
+  {title:'橡皮擦鉛筆字',key:'摩擦會磨耗',front:'擦拭後為什麼會出現橡皮屑？',back:'橡皮與紙面摩擦，帶走部分石墨，也造成材料磨耗並產生少量熱。',icon:'eraser',alt:'粉紅橡皮擦貼著紙面上的石墨筆跡，接觸處留下幾粒粉紅橡皮屑。'},
+  {title:'攀岩用粉袋',key:'改善接觸',front:'手汗多時，攀岩者為何使用粉末？',back:'攀岩粉可吸收部分水分，改善手與岩點的接觸和抓握；仍須依安全裝備與專業指導操作。',icon:'chalk',alt:'一隻手伸入攀岩粉袋，另一隻手掌與指尖覆有薄薄白色攀岩粉。'},
+  {title:'搬運用滾輪',key:'改變接觸方式',front:'重物放上滾輪後，為什麼常較省力？',back:'把大量滑動接觸改為滾動，許多情況下阻力較小；軸承也能降低部件間的滑動摩擦。',icon:'roller',alt:'木箱完整放在三根互相平行的橘色圓柱滾輪上，箱後有輕微移動線。'}
 ];
-$('#applyGrid').innerHTML=applications.map((item,index)=>`<article class="apply-card"><button type="button" aria-expanded="false" aria-label="${item.title}：翻卡查看解釋"><span class="apply-inner"><span class="apply-face apply-front"><span class="science-key">${item.key}</span><span class="case-visual" data-icon="${item.icon}" aria-hidden="true"></span><h3>${item.title}</h3><p>${item.front}</p><small>點擊翻面 →</small></span><span class="apply-face apply-back"><span class="science-key">科學解釋</span><h3>${item.title}</h3><p>${item.back}</p><small>再點一次回到提問</small></span></span></button></article>`).join('');
+$('#applyGrid').innerHTML=applications.map((item,index)=>`<article class="apply-card"><button type="button" aria-expanded="false" aria-label="${item.title}：翻卡查看解釋"><span class="apply-inner"><span class="apply-face apply-front"><span class="science-key">${item.key}</span><img class="case-visual" src="assets/applications/${item.icon}.webp" width="960" height="640" loading="lazy" decoding="async" alt="${item.alt}" /><h3>${item.title}</h3><p>${item.front}</p><small>點擊翻面 →</small></span><span class="apply-face apply-back"><span class="science-key">科學解釋</span><h3>${item.title}</h3><p>${item.back}</p><small>再點一次回到提問</small></span></span></button></article>`).join('');
 $$('.apply-card button').forEach(button=>button.addEventListener('click',()=>{
   const card=button.closest('.apply-card');
   const flipped=card.classList.toggle('is-flipped');

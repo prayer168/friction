@@ -8,8 +8,8 @@
 
 | 項目 | 結果 |
 |---|---|
-| `npm.cmd test`：頁籤、案例、題目、互動、無障礙、來源、社群 metadata 與占位掃描 | 通過（16/16） |
-| `npm.cmd run build`：靜態正式建置 | 通過；`dist/` 含 HTML、CSS、JS、SVG 資產 |
+| `npm.cmd test`：頁籤、案例、題目、互動、無障礙、來源、圖片資產、社群 metadata 與占位掃描 | 通過（17/17） |
+| `npm.cmd run build`：靜態正式建置 | 通過；`dist/` 含 HTML、CSS、JS、SVG 與 WebP 資產 |
 | `npm.cmd audit`：套件安全檢查 | 通過；0 個弱點 |
 | `git diff --cached --check`：空白與衝突標記 | 通過 |
 
@@ -57,6 +57,16 @@
 - 公開版 390×844 逐頁檢查：七頁籤皆 `scrollWidth=clientWidth=390`，無頁面水平溢出。
 - 公開推箱實驗：4 kg、一般面、20 N 推力，結果為「開始滑動」、動摩擦力 10.0 N、合力 10.0 N。
 - 公開版主控台 0 個錯誤、無錯誤覆蓋層；首頁、CSS、JavaScript 與 favicon 的瀏覽器請求均回應 200。
+
+## 1.1.0 生活應用圖像驗證
+
+- 八張生活應用圖案以 OpenAI Image 2.0 逐張重新繪製，統一為教室立體模型風格，並最佳化為 960×640 WebP 專案內資產。
+- 桌機 1440×1000 為四欄、平板 768×1024 為兩欄、手機 390×844 為單欄；三種 viewport 均無頁面水平溢出。
+- 八張圖片皆載入完成、自然尺寸皆為 960×640，且各自具備描述情境與摩擦力線索的繁體中文替代文字。
+- 翻卡後 `aria-expanded=true`，背面解說完整可見；圖片載入不影響原有翻卡與鍵盤操作。
+- 首頁、CSS、JavaScript、favicon 與八張 WebP 圖片的瀏覽器請求全部回應 HTTP 200；主控台 0 個錯誤。
+- 專案未使用外部圖片 URL，公開教材不依賴第三方圖片服務。
+- 目視證據：`docs/screenshots/applications-image2-desktop.png`、`applications-image2-tablet.png`、`applications-image2-mobile.png`。
 
 ## 已知限制
 
