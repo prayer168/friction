@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">摩擦力搜查隊社群預覽圖</title>
+  <desc id="desc">深藍、黃色與青綠色的摩擦力教材預覽圖，呈現木箱、向右推力與向左摩擦力，以及實驗、動畫與闖關功能。</desc>
+  <defs><linearGradient id="bg" x1="0" x2="1"><stop stop-color="#f7f3e8"/><stop offset="1" stop-color="#d8f2ee"/></linearGradient><marker id="a" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0 0 12 6 0 12Z" fill="context-stroke"/></marker></defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <path d="M0 520h1200v110H0z" fill="#123047"/>
+  <rect x="70" y="62" width="83" height="83" rx="24" fill="#ffca5c" stroke="#123047" stroke-width="7"/>
+  <path d="M87 91h49M87 115h49" stroke="#123047" stroke-width="8"/>
+  <text x="180" y="112" font-family="Microsoft JhengHei, sans-serif" font-size="52" font-weight="900" fill="#123047">摩擦力搜查隊</text>
+  <text x="76" y="193" font-family="Microsoft JhengHei, sans-serif" font-size="25" font-weight="700" fill="#0e8f8f">觀察 · 預測 · 蒐證 · 解釋</text>
+  <g transform="translate(80 245)"><rect width="340" height="185" rx="24" fill="#fff" stroke="#123047" stroke-width="5"/><text x="36" y="55" font-family="Microsoft JhengHei, sans-serif" font-size="25" font-weight="900" fill="#123047">推箱實驗</text><text x="36" y="101" font-family="Microsoft JhengHei, sans-serif" font-size="20" fill="#536a78">改變表面、質量與推力</text><text x="36" y="139" font-family="Microsoft JhengHei, sans-serif" font-size="20" fill="#536a78">用數據找到啟動門檻</text></g>
+  <g transform="translate(470 236)"><rect x="80" y="65" width="310" height="190" rx="18" fill="#ffca5c" stroke="#123047" stroke-width="8"/><path d="M235 65v190M80 126h310" stroke="#c76a24" stroke-width="5"/><path d="M405 152h145" stroke="#0e8f8f" stroke-width="16" stroke-linecap="round" marker-end="url(#a)"/><path d="M65 205H-55" stroke="#e45756" stroke-width="16" stroke-linecap="round" marker-end="url(#a)"/><text x="435" y="123" font-family="Microsoft JhengHei, sans-serif" font-size="25" font-weight="900" fill="#0e8f8f">推力</text><text x="-53" y="176" font-family="Microsoft JhengHei, sans-serif" font-size="25" font-weight="900" fill="#e45756">摩擦力</text><path d="M-70 259h650" stroke="#123047" stroke-width="10"/><path d="M-65 280 0 255l40 27 50-26 45 29 46-28 50 26 53-26 45 25 55-28 48 29 55-28 47 26 58-25" fill="none" stroke="#718995" stroke-width="8"/></g>
+  <g font-family="Microsoft JhengHei, sans-serif" font-weight="900" fill="#fff" font-size="25"><text x="78" y="579">互動實驗</text><text x="252" y="579">分段動畫</text><text x="426" y="579">生活應用</text><text x="600" y="579">十題闖關</text></g>
+  <rect x="940" y="62" width="190" height="52" rx="26" fill="#123047"/><text x="1035" y="96" text-anchor="middle" font-family="Microsoft JhengHei, sans-serif" font-size="21" font-weight="900" fill="#fff">國小高年級</text>
+</svg>

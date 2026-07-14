@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="適合國小高年級的摩擦力互動數位教材，透過推箱實驗、分段動畫、生活案例與闖關理解靜摩擦力與動摩擦力。" />
+  <meta name="theme-color" content="#123047" />
+  <title>摩擦力搜查隊｜互動數位教材</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到主要內容</a>
+  <header class="site-header">
+    <div class="brand-mark" aria-hidden="true"><span></span><i></i></div>
+    <div>
+      <p class="eyebrow">國小高年級 · 自然科學</p>
+      <h1>摩擦力搜查隊</h1>
+    </div>
+    <p class="header-badge">觀察 · 預測 · 蒐證 · 解釋</p>
+  </header>
+
+  <nav class="tabs" aria-label="教材單元" role="tablist">
+    <button role="tab" id="tab-mission" aria-controls="mission" aria-selected="true" data-tab="mission"><span>01</span>任務</button>
+    <button role="tab" id="tab-explore" aria-controls="explore" aria-selected="false" data-tab="explore" tabindex="-1"><span>02</span>探索</button>
+    <button role="tab" id="tab-lab" aria-controls="lab" aria-selected="false" data-tab="lab" tabindex="-1"><span>03</span>實驗室</button>
+    <button role="tab" id="tab-animation" aria-controls="animation" aria-selected="false" data-tab="animation" tabindex="-1"><span>04</span>動畫</button>
+    <button role="tab" id="tab-apply" aria-controls="apply" aria-selected="false" data-tab="apply" tabindex="-1"><span>05</span>應用</button>
+    <button role="tab" id="tab-quiz" aria-controls="quiz" aria-selected="false" data-tab="quiz" tabindex="-1"><span>06</span>闖關</button>
+    <button role="tab" id="tab-resources" aria-controls="resources" aria-selected="false" data-tab="resources" tabindex="-1"><span>07</span>資源</button>
+  </nav>
+
+  <main id="main">
+    <section class="panel active" id="mission" role="tabpanel" aria-labelledby="tab-mission">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <p class="kicker">今日委託</p>
+          <h2>幫校園找出<br /><em>剛剛好的摩擦力</em></h2>
+          <p class="lead">你是校園安全設計師。書櫃要能搬動，走廊又不能太滑；請用實驗證據，提出一份兼顧省力與安全的設計建議。</p>
+          <button class="primary" data-go="explore">開始搜查 <span aria-hidden="true">→</span></button>
+        </div>
+        <div class="hero-scene">
+          <svg viewBox="0 0 620 430" role="img" aria-labelledby="heroTitle heroDesc">
+            <title id="heroTitle">學生推動木箱的受力示意</title>
+            <desc id="heroDesc">木箱在粗糙地面上，右方有推力箭頭，左方有摩擦力箭頭。放大鏡顯示接觸面其實有凹凸。</desc>
+            <defs>
+              <linearGradient id="heroBox" x1="0" x2="1"><stop stop-color="#ffbf69"/><stop offset="1" stop-color="#f28f3b"/></linearGradient>
+              <pattern id="heroFloor" width="26" height="16" patternUnits="userSpaceOnUse"><path d="M0 14 6 7l7 6 6-8 7 9" fill="none" stroke="#5d7181" stroke-width="3"/></pattern>
+              <marker id="heroArrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0 10 5 0 10Z" fill="context-stroke"/></marker>
+            </defs>
+            <circle cx="480" cy="112" r="82" fill="#fff" stroke="#123047" stroke-width="7"/>
+            <path d="M417 118l16-15 14 16 17-20 17 18 19-22 17 22 19-14 17 18" fill="none" stroke="#f28f3b" stroke-width="8" stroke-linejoin="round"/>
+            <path d="M425 141l18-13 15 15 20-17 16 14 20-15 18 16" fill="none" stroke="#123047" stroke-width="8" stroke-linejoin="round"/>
+            <path d="M422 175 372 225" stroke="#123047" stroke-width="8" stroke-linecap="round"/>
+            <rect x="160" y="168" width="236" height="146" rx="12" fill="url(#heroBox)" stroke="#123047" stroke-width="7"/>
+            <path d="M278 168v146M160 212h236" stroke="#c76a24" stroke-width="4" opacity=".75"/>
+            <circle cx="196" cy="204" r="8" fill="#123047"/><circle cx="358" cy="204" r="8" fill="#123047"/>
+            <path d="M103 243H30" stroke="#e45756" stroke-width="12" stroke-linecap="round" marker-end="url(#heroArrow)"/>
+            <text x="30" y="218" class="svg-label">摩擦力</text>
+            <path d="M410 243h142" stroke="#0e8f8f" stroke-width="12" stroke-linecap="round" marker-end="url(#heroArrow)"/>
+            <text x="455" y="218" class="svg-label">推力</text>
+            <rect x="24" y="314" width="572" height="66" rx="8" fill="url(#heroFloor)"/>
+            <path d="M24 316h572" stroke="#123047" stroke-width="7"/>
+            <text x="308" y="405" text-anchor="middle" class="svg-note">摩擦力沿接觸面，反抗相對滑動或滑動趨勢</text>
+          </svg>
+        </div>
+      </div>
+      <div class="goal-grid" aria-label="學習目標">
+        <article><b>01</b><div><h3>判斷方向</h3><p>從物體的滑動或滑動趨勢，指出摩擦力方向。</p></div></article>
+        <article><b>02</b><div><h3>比較大小</h3><p>用表面狀況與壓緊程度，比較啟動物體所需的推力。</p></div></article>
+        <article><b>03</b><div><h3>辨認兩種摩擦</h3><p>以證據區分靜摩擦力與動摩擦力。</p></div></article>
+        <article><b>04</b><div><h3>提出設計</h3><p>解釋生活中何時要增大或減小摩擦力。</p></div></article>
+      </div>
+    </section>
+
+    <section class="panel" id="explore" role="tabpanel" aria-labelledby="tab-explore" hidden>
+      <div class="section-heading">
+        <p class="kicker">概念探索</p>
+        <h2>看不見的接觸力，怎麼留下線索？</h2>
+        <p>摩擦力發生在互相接觸的表面之間，方向沿著接觸面，反抗兩表面的相對滑動或滑動趨勢。</p>
+      </div>
+      <div class="concept-grid">
+        <article class="concept-card direction-card">
+          <div class="card-tag">線索 A · 方向</div>
+          <h3>不要只看「物體往哪裡」</h3>
+          <div class="direction-demo" role="img" aria-label="箱子有向右滑動趨勢時，地面對箱子的摩擦力向左">
+            <div class="mini-box">箱</div>
+            <span class="force push">推力 →</span><span class="force friction">← 摩擦力</span>
+          </div>
+          <p>先想：如果沒有摩擦，兩個接觸面會往哪個方向相對滑動？摩擦力就反抗那個趨勢。</p>
+        </article>
+        <article class="concept-card state-card">
+          <div class="card-tag">線索 B · 狀態</div>
+          <h3>沒動，不代表沒有摩擦力</h3>
+          <div class="state-compare">
+            <div><span class="status-dot still"></span><b>靜摩擦力</b><p>尚未相對滑動；會配合外力改變，直到上限。</p></div>
+            <div><span class="status-dot sliding"></span><b>動摩擦力</b><p>已經相對滑動；方向和滑動相反。</p></div>
+          </div>
+        </article>
+        <article class="concept-card micro-card">
+          <div class="card-tag">線索 C · 接觸面</div>
+          <h3>肉眼平滑，放大後仍不平整</h3>
+          <svg viewBox="0 0 520 215" role="img" aria-labelledby="microTitle microDesc">
+            <title id="microTitle">兩個接觸面的微觀示意</title>
+            <desc id="microDesc">上下表面都有不規則凹凸，只有部分凸點真正接觸。此圖為概念示意，並非真實比例。</desc>
+            <path d="M20 83 58 62l35 25 40-39 43 35 42-25 38 29 48-45 43 38 42-22 49 30 42-36 40 31" fill="#ffbf69" stroke="#123047" stroke-width="6" stroke-linejoin="round"/>
+            <path d="M20 145 58 126l40 27 38-35 40 28 46-22 38 31 45-38 44 27 43-20 44 30 42-34 40 34v45H20Z" fill="#85d0c9" stroke="#123047" stroke-width="6" stroke-linejoin="round"/>
+            <g fill="#e45756"><circle cx="134" cy="116" r="8"/><circle cx="306" cy="114" r="8"/><circle cx="438" cy="118" r="8"/></g>
+            <g class="contact-labels" fill="#123047"><text x="134" y="204" text-anchor="middle">實際接觸點</text><path d="M134 187v-58M306 187v-61M438 187v-57"/></g>
+          </svg>
+          <p class="note">示意模型：摩擦也受到材料分子作用、表面污染與變形等因素影響，不是只有「凹凸互卡」。</p>
+        </article>
+        <article class="concept-card model-card">
+          <div class="card-tag">線索 D · 簡化模型</div>
+          <h3>越難滑動，通常要推得更用力</h3>
+          <div class="formula-box"><span>最大靜摩擦力</span><b>≈</b><span>摩擦係數 × 正向力</span></div>
+          <ul>
+            <li><strong>材料組合改變：</strong>摩擦係數可能改變。</li>
+            <li><strong>壓得更緊：</strong>正向力較大，簡化模型中的摩擦上限較大。</li>
+            <li><strong>開始滑動後：</strong>許多乾燥表面的動摩擦力小於最大靜摩擦力。</li>
+          </ul>
+          <details><summary>為什麼寫「≈」而不是永遠相等？</summary><p>這是常用的乾燥滑動簡化模型。真實摩擦還可能受潤滑、速度、溫度、材料變形與表面狀況影響。</p></details>
+        </article>
+      </div>
+      <div class="misconception"><strong>偵探提醒</strong><p>「摩擦力永遠阻礙物體運動」不夠精確。走路時，地面給腳的靜摩擦力能推動人前進；摩擦力反抗的是接觸面的<strong>相對滑動或滑動趨勢</strong>。</p></div>
+    </section>
+
+    <section class="panel" id="lab" role="tabpanel" aria-labelledby="tab-lab" hidden>
+      <div class="section-heading">
+        <p class="kicker">推箱實驗室</p>
+        <h2>先預測，再用力的數據破案</h2>
+        <p>改變表面、箱子質量與推力。每次只比較一個變因，才能讓證據說話。</p>
+      </div>
+      <div class="lab-layout">
+        <aside class="controls" aria-label="實驗控制">
+          <fieldset>
+            <legend>1. 選擇表面模型</legend>
+            <div class="segmented" id="surfaceOptions">
+              <button type="button" data-surface="smooth">滑面 <small>低阻力</small></button>
+              <button type="button" data-surface="medium" class="selected">一般面 <small>中阻力</small></button>
+              <button type="button" data-surface="rough">粗糙面 <small>高阻力</small></button>
+            </div>
+          </fieldset>
+          <label class="range-label" for="massRange"><span>2. 箱子質量</span><output id="massOut">4 kg</output></label>
+          <input id="massRange" type="range" min="2" max="8" step="1" value="4" />
+          <label class="range-label" for="pushRange"><span>3. 水平推力</span><output id="pushOut">20 N</output></label>
+          <input id="pushRange" type="range" min="0" max="80" step="2" value="20" />
+          <fieldset>
+            <legend>4. 預測結果</legend>
+            <div class="prediction" id="predictionButtons">
+              <button type="button" data-predict="still">不會滑動</button>
+              <button type="button" data-predict="move">開始滑動</button>
+            </div>
+          </fieldset>
+          <button class="primary full" id="testBtn">開始測試</button>
+          <button class="secondary full" id="resetLabBtn">重設實驗</button>
+          <p class="model-note">本頁使用教學用乾燥滑動模型，係數為比較用設定，不代表特定真實材料。</p>
+        </aside>
+        <div>
+          <div class="simulation" id="simulation">
+            <div class="sim-status"><span>測試狀態</span><b id="resultBadge">等待預測</b></div>
+            <svg viewBox="0 0 760 430" role="img" aria-labelledby="simTitle simDesc">
+              <title id="simTitle">摩擦力推箱模擬</title>
+              <desc id="simDesc">一個四公斤箱子放在一般表面上，等待施加二十牛頓的水平推力。</desc>
+              <defs>
+                <linearGradient id="labBox" x1="0" x2="1"><stop stop-color="#ffd99c"/><stop offset="1" stop-color="#f28f3b"/></linearGradient>
+                <pattern id="floorSmooth" width="30" height="18" patternUnits="userSpaceOnUse"><path d="M0 10h30" stroke="#9bb1bd" stroke-width="2"/></pattern>
+                <pattern id="floorMedium" width="30" height="18" patternUnits="userSpaceOnUse"><path d="M0 14 8 7l7 6 8-8 7 9" fill="none" stroke="#718995" stroke-width="3"/></pattern>
+                <pattern id="floorRough" width="30" height="22" patternUnits="userSpaceOnUse"><path d="M0 18 6 4l8 13L21 2l9 17" fill="none" stroke="#536a78" stroke-width="5"/></pattern>
+                <marker id="simArrow" markerUnits="userSpaceOnUse" markerWidth="24" markerHeight="24" refX="21" refY="12" orient="auto"><path d="M0 0 24 12 0 24Z" fill="context-stroke"/></marker>
+              </defs>
+              <g id="motionMarks" aria-hidden="true"><path d="M74 138h112M45 173h120M86 208h83"/></g>
+              <g id="crateGroup" class="crate waiting">
+                <rect x="288" y="155" width="190" height="155" rx="10" fill="url(#labBox)" stroke="#123047" stroke-width="7"/>
+                <path d="M288 206h190M383 155v155" stroke="#c76a24" stroke-width="4"/>
+                <text id="crateMass" x="383" y="255" text-anchor="middle">4 kg</text>
+              </g>
+              <g class="force-arrow push-arrow"><path id="pushLine" d="M492 230h118"/><text id="pushLabel" x="535" y="200">推力 20 N</text></g>
+              <g class="force-arrow friction-arrow"><path id="frictionLine" d="M274 270H174"/><text id="frictionLabel" x="170" y="304">摩擦力 ?</text></g>
+              <rect id="floorRect" x="35" y="310" width="690" height="72" rx="6" fill="url(#floorMedium)"/>
+              <path d="M35 311h690" stroke="#123047" stroke-width="7"/>
+              <text id="surfaceLabel" x="380" y="410" text-anchor="middle">一般面 · 模型係數 μs 0.35 / μk 0.25</text>
+            </svg>
+            <div class="readouts" aria-label="實驗讀數">
+              <div><span>最大靜摩擦力</span><b id="staticMax">14.0 N</b></div>
+              <div><span>實際摩擦力</span><b id="actualFriction">—</b></div>
+              <div><span>水平方向合力</span><b id="netForce">—</b></div>
+              <div><span>運動判斷</span><b id="motionState">—</b></div>
+            </div>
+          </div>
+          <div id="labFeedback" class="feedback" aria-live="polite">先選擇「不會滑動」或「開始滑動」，再開始測試。</div>
+          <div class="evidence-box">
+            <div><p class="kicker">證據解讀</p><p id="evidenceText">最大靜摩擦力是啟動前的門檻；實際靜摩擦力不會一開始就等於最大值。</p></div>
+            <button id="recordBtn" class="secondary" disabled>記錄這次</button>
+          </div>
+        </div>
+      </div>
+      <section class="notebook" aria-labelledby="notebookTitle">
+        <div><p class="kicker">我的紀錄本</p><h3 id="notebookTitle">最多保留 6 次測試，找出一項規律</h3></div>
+        <div class="table-wrap"><table><thead><tr><th>次數</th><th>表面</th><th>質量</th><th>推力</th><th>靜摩擦上限</th><th>結果</th></tr></thead><tbody id="trialBody"><tr class="empty-row"><td colspan="6">尚未記錄測試</td></tr></tbody></table></div>
+        <div class="notebook-actions"><button id="clearTrials" class="secondary">清除紀錄</button><p id="trialPrompt">試著保持質量和推力不變，只改變表面。</p></div>
+      </section>
+    </section>
+
+    <section class="panel" id="animation" role="tabpanel" aria-labelledby="tab-animation" hidden>
+      <div class="section-heading">
+        <p class="kicker">原理動畫</p>
+        <h2>從「推不動」到「滑起來」</h2>
+        <p>逐格比較推力、靜摩擦力上限與滑動後的動摩擦力；箭頭長度代表力的相對大小。</p>
+      </div>
+      <div class="animation-layout">
+        <div class="animation-stage" id="animationStage" data-stage="0">
+          <svg viewBox="0 0 720 430" role="img" aria-labelledby="animTitle animDesc">
+            <title id="animTitle">靜摩擦轉為動摩擦的五階段動畫</title>
+            <desc id="animDesc">起初箱子靜止；推力增加時靜摩擦力同步增加；推力超過上限後箱子向右滑動，動摩擦力向左並伴隨少量熱能。</desc>
+            <defs><marker id="animArrow" markerUnits="userSpaceOnUse" markerWidth="24" markerHeight="24" refX="21" refY="12" orient="auto"><path d="M0 0 24 12 0 24Z" fill="context-stroke"/></marker></defs>
+            <g class="anim-motion"><path d="M82 115h105M50 150h120M90 185h82"/></g>
+            <g class="anim-crate"><rect x="275" y="150" width="180" height="150" rx="10"/><path d="M275 200h180M365 150v150"/><text x="365" y="250" text-anchor="middle">箱子</text></g>
+            <g class="anim-push"><path d="M474 220h95"/><text x="489" y="190">推力</text></g>
+            <g class="anim-friction"><path d="M256 262h-76"/><text x="126" y="294">摩擦力</text></g>
+            <g class="anim-limit"><line x1="110" y1="80" x2="610" y2="80"/><circle cx="480" cy="80" r="9"/><text x="480" y="58" text-anchor="middle">靜摩擦上限</text><rect x="110" y="70" width="0" height="20" rx="10"/></g>
+            <g class="heat" aria-hidden="true"><path d="M300 327q12-20 24 0t24 0M372 327q12-20 24 0t24 0"/></g>
+            <path class="anim-ground" d="M35 302h650l-9 20-14-18-16 20-15-20-18 18-17-18-17 20-17-21-20 20-18-19-18 20-18-21-18 20-18-18-18 19-19-22-18 21-18-17-18 18-19-21-18 20-19-18-18 20-18-21-18 20-19-18-18 18-18-17-17 18-17-17-18 17-18-18-14 18-13-20-13 20-12-18-11 18Z"/>
+            <text class="anim-stage-label" x="360" y="390" text-anchor="middle">準備觀察兩個接觸面</text>
+          </svg>
+          <div class="animation-controls">
+            <button id="playBtn" class="primary">播放</button>
+            <button id="pauseBtn" class="secondary">暫停</button>
+            <button id="replayBtn" class="secondary">重播</button>
+          </div>
+          <p id="animationCaption" class="animation-caption" aria-live="polite">階段 1／5：箱子尚未受到水平推力，沒有滑動趨勢；本圖先聚焦水平方向。</p>
+        </div>
+        <ol class="stage-list" aria-label="動畫階段">
+          <li><button data-step="0" class="active"><span>1</span><div><b>準備觀察</b><small>箱子在接觸面上靜止</small></div></button></li>
+          <li><button data-step="1"><span>2</span><div><b>輕輕推</b><small>靜摩擦力與推力平衡</small></div></button></li>
+          <li><button data-step="2"><span>3</span><div><b>推得更大</b><small>仍未超過靜摩擦上限</small></div></button></li>
+          <li><button data-step="3"><span>4</span><div><b>突破上限</b><small>接觸面開始相對滑動</small></div></button></li>
+          <li><button data-step="4"><span>5</span><div><b>滑動中</b><small>動摩擦反抗滑動並轉移能量</small></div></button></li>
+        </ol>
+      </div>
+      <div class="observe-question"><strong>觀察挑戰</strong><p>為什麼有些箱子「一旦推動，就比較容易繼續滑」？請用動畫中的兩種摩擦力回答。</p><button id="revealObservation" class="secondary">查看提示</button><p id="observationHint" hidden>比較第 3 與第 5 階段：在許多乾燥表面，動摩擦力小於最大靜摩擦力；但這不是所有材料與情況都必然成立。</p></div>
+    </section>
+
+    <section class="panel" id="apply" role="tabpanel" aria-labelledby="tab-apply" hidden>
+      <div class="section-heading">
+        <p class="kicker">生活應用</p>
+        <h2>摩擦力不是敵人，也不是越大越好</h2>
+        <p>先判斷情境需要「增大」還是「減小」摩擦，再翻卡核對。每張卡都會顯示改變的位置。</p>
+      </div>
+      <div id="applyGrid" class="apply-grid"></div>
+      <div class="transfer-prompt"><strong>設計任務</strong><p>校園書櫃平時要穩、不容易滑動；搬運時又希望省力。你會加上哪兩種不同設計？說明它們如何改變摩擦。</p></div>
+    </section>
+
+    <section class="panel" id="quiz" role="tabpanel" aria-labelledby="tab-quiz" hidden>
+      <div class="quiz-heading">
+        <div class="section-heading"><p class="kicker">闖關挑戰</p><h2>用十條線索結案</h2><p>每題作答後會鎖定並顯示解釋；完成後可重玩整組題目。</p></div>
+        <div class="score-card" aria-live="polite"><span>目前得分</span><b><i id="score">0</i> / 10</b><small id="progress">已完成 0 題</small></div>
+      </div>
+      <div id="quizList" class="quiz-list"></div>
+      <div id="quizSummary" class="quiz-summary" hidden><h3 id="summaryTitle"></h3><p id="summaryText"></p><button id="restartQuiz" class="primary">重新闖關</button></div>
+    </section>
+
+    <section class="panel" id="resources" role="tabpanel" aria-labelledby="tab-resources" hidden>
+      <div class="section-heading"><p class="kicker">延伸資源</p><h2>繼續查證與動手做</h2><p>以下連結用於內容查核與延伸探索；本教材視覺均以原生 SVG／CSS 製作，未嵌入外部圖片。</p></div>
+      <div class="resource-grid">
+        <a href="https://openstax.org/books/university-physics-volume-1/pages/6-2-friction" target="_blank" rel="noopener"><span>開放教科書</span><h3>OpenStax｜Friction</h3><p>靜摩擦、動摩擦、方向、正向力與簡化摩擦模型的完整說明。</p><small>來源：OpenStax　程度：教師／進階　查核：2026-07-14</small></a>
+        <a href="https://phet.colorado.edu/zh_TW/simulations/forces-and-motion-basics" target="_blank" rel="noopener"><span>互動模擬</span><h3>PhET｜力與運動：基礎</h3><p>調整摩擦與推力，觀察力箭頭、合力、速度與加速度。</p><small>來源：University of Colorado Boulder　程度：學生　查核：2026-07-14</small></a>
+        <a href="https://hyperphysics.phy-astr.gsu.edu/hbase/frict.html" target="_blank" rel="noopener"><span>大學物理資料庫</span><h3>HyperPhysics｜Friction</h3><p>摩擦係數、正向力與靜摩擦／動摩擦模型的精簡圖解。</p><small>來源：Georgia State University　程度：教師／進階　查核：2026-07-14</small></a>
+        <a href="https://www.purdue.edu/hardware-store-science/wp-content/uploads/2021/09/9.0-Contact-Forces-Sliding-Friction_STEM-Content.pdf" target="_blank" rel="noopener"><span>STEM 教學資源</span><h3>Purdue｜Sliding Friction</h3><p>以實驗比較接觸力、靜摩擦與滑動摩擦的教學資料。</p><small>來源：Purdue University　程度：教師　查核：2026-07-14</small></a>
+      </div>
+      <aside class="teacher-note">
+        <h3>教師使用建議</h3>
+        <ul><li>建議 35–45 分鐘：概念探索 8 分鐘、變因實驗 15 分鐘、動畫與應用 10 分鐘、闖關 10 分鐘。</li><li>請學生至少記錄三次測試，且每次只改變一個變因。</li><li>延伸實作可用彈簧秤拉動同一物體，比較「剛開始滑動」與「穩定滑動」的讀數。</li></ul>
+        <p><strong>安全：</strong>實物實驗不要拉動大型家具，不在樓梯、濕滑地面或車道測試摩擦。</p>
+      </aside>
+      <footer>摩擦力搜查隊 · 教學模型已清楚標示簡化條件 · 無外部圖片資產</footer>
+    </section>
+  </main>
+</body>
+</html>

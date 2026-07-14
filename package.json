@@ -1,0 +1,11 @@
+{
+  "name": "friction",
+  "version": "1.0.0",
+  "private": true,
+  "description": "國小高年級摩擦力互動數位教材",
+  "scripts": {
+    "test": "node tests/verify.mjs",
+    "build": "node tests/build.mjs",
+    "serve": "node tests/serve.mjs"
+  }
+}
