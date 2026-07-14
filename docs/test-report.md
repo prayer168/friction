@@ -80,6 +80,8 @@
 - 降低動畫：媒體查詢命中時，錢幣直接抵達計算後的停止位置，完整讀數與紀錄功能仍保留。
 - 1440×1000、768×1024、390×844 均為 `scrollWidth=clientWidth`；手機紀錄表只在自身容器橫向捲動。
 - 本機瀏覽器首頁、CSS、`incline-model.js`、`app.js`、favicon 均回應 HTTP 200；主控台 0 個錯誤、無錯誤覆蓋層。
+- GitHub Pages 功能提交 `aae26a4` 建置狀態為 `built`；公開首頁、CSS、`incline-model.js`、`app.js` 與兩份物理稽核檔均回應 HTTP 200。
+- 公開版 390×844 實測：30°粗糙面臨界角 26.6°，預測「不到 1 m」後得到 0.93 m；`scrollWidth=clientWidth=390`，主控台 0 個錯誤、無錯誤覆蓋層。
 - 目視證據：`docs/screenshots/incline-initial-desktop.png`、`incline-result-desktop.png`、`incline-result-tablet.png`、`incline-result-mobile.png`。
 - 完整物理稽核：`audit/incline-physics-audit.md` 與 `audit/incline-physics-audit.json`；重跑指令為 `npm.cmd run audit:physics`。
 
