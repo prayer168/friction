@@ -1,7 +1,9 @@
 【繁體中文】
 摩擦力不是越大越好，也不只是「阻礙運動」。我們能走路、煞車和抓穩物品，都少不了接觸面之間的摩擦力。
 
-《摩擦力搜查隊》是一份適合國小高年級的互動數位教材。孩子可以調整表面、箱子質量與推力，先預測再測試，記錄六次實驗證據；還能透過五階段動畫、八個生活案例與十題闖關，理解靜摩擦力、動摩擦力和啟動門檻。
+《摩擦力搜查隊》是一份適合國小高年級的互動數位教材。實驗室現在有兩個場景：在「平面推箱」中調整表面、質量與推力；在「斜坡滑幣」中比較 5°–45° 的角度與三種粗糙度，先預測錢幣會不會滑動、會滑多遠，再用力與距離的數據修正想法。
+
+孩子可以保存六次實驗紀錄，還能透過五階段動畫、八個生活案例與十題闖關，逐步理解靜摩擦力、動摩擦力、臨界角與啟動門檻。
 
 歡迎打開教材，一起用觀察、數據與解釋完成摩擦力調查：
 https://prayer168.github.io/friction/
@@ -9,7 +11,9 @@ https://prayer168.github.io/friction/
 【English】
 Friction is not simply “the bigger, the better,” and it does more than slow things down. Walking, braking, and holding objects securely all depend on friction between contacting surfaces.
 
-Friction Force Detectives is an interactive science lesson for upper-elementary learners. Students change the surface, box mass, and applied force; make a prediction before testing; and record evidence from up to six trials. A five-stage animation, eight real-life cases, and a ten-question challenge help them distinguish static and kinetic friction and understand the threshold for motion.
+Friction Force Detectives is an interactive science lesson for upper-elementary learners with two laboratory scenes. In “Push the Box,” students change the surface, mass, and applied force. In “Coin on a Ramp,” they compare angles from 5° to 45° and three surface textures, predict whether the coin will move and how far it will travel, then revise their ideas using force and distance data.
+
+Students can save six trials and continue with a five-stage animation, eight real-life cases, and a ten-question challenge to explore static friction, kinetic friction, critical angles, and the threshold for motion.
 
 Open the lesson and investigate friction through observation, data, and explanation:
 https://prayer168.github.io/friction/
