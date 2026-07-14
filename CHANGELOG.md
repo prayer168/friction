@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.1 — 2026-07-14
+
+- 新增 1200×630 PNG 社群預覽圖與 favicon。
+- 加入正式 GitHub Pages Open Graph／Twitter Card metadata。
+- 同步公開網址、Facebook 中英文分享文與部署後驗證紀錄。
+
 ## 1.0.0 — 2026-07-14
 
 - 建立七頁籤「摩擦力搜查隊」互動教材。

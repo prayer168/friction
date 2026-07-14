@@ -1,8 +1,9 @@
-import {readFile} from 'node:fs/promises';
+import {readFile,stat} from 'node:fs/promises';
 import {resolve} from 'node:path';
 
 const root=resolve(import.meta.dirname,'..');
 const [html,css,js]=await Promise.all(['index.html','styles.css','app.js'].map(file=>readFile(resolve(root,file),'utf8')));
+const preview=await stat(resolve(root,'assets','social-preview.png')).catch(()=>null);
 const checks=[
   ['七個頁籤',(html.match(/role="tab"/g)||[]).length===7],
   ['十題四選一',js.includes('const questions=[')&&(js.match(/\{q:'/g)||[]).length===10],
@@ -16,6 +17,8 @@ const checks=[
   ['降低動畫',css.includes('@media(prefers-reduced-motion:reduce)')&&js.includes("prefers-reduced-motion: reduce")],
   ['三種響應式層級',css.includes('@media(max-width:960px)')&&css.includes('@media(max-width:640px)')],
   ['來源與查核日期',(html.match(/查核：2026-07-14/g)||[]).length===4],
+  ['正式社群 metadata',html.includes('https://prayer168.github.io/friction/')&&html.includes('twitter:card')&&html.includes('og:image:width')&&html.includes('og:image:height')],
+  ['社群預覽 PNG',Boolean(preview?.isFile()&&preview.size>10000)],
   ['沒有未完成占位',!/(待補|範例題|示範題|TODO|FIXME|placeholder)/i.test(html+css+js)],
   ['沒有外部圖片',!/<img\b/i.test(html)&&!/^\s*(?:background-)?image\s*:\s*url\(['"]?https?:/im.test(css)]
 ];
