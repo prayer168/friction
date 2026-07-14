@@ -90,3 +90,12 @@
 - 教材是比較用乾燥滑動模型，不替代真實材料量測。
 - 斜坡模型不處理錢幣滾動、彈跳、空氣阻力、坡底碰撞損失或材料係數隨速度改變；動畫時間為方便觀察的視覺時間。
 - 未加入音效，避免課堂干擾並降低認知負荷。
+
+## 1.2.0 收工與社群分享驗證
+
+- 收工提交 `6ea2d68` 刷新雙實驗社群預覽圖、Open Graph／Twitter 替代文字，以及繁體中文／英文 Facebook 分享文。
+- 公開縮圖 `https://prayer168.github.io/friction/assets/social-preview.png` 回應 HTTP 200、`image/png`、195,889 bytes，尺寸精確為 1200×630。
+- 公開 DOM 的 `og:url`、`og:image`、`twitter:image` 均為正式絕對 HTTPS 網址；`og:image:width=1200`、`og:image:height=630`、`twitter:card=summary_large_image`。
+- 公開首頁、CSS、`incline-model.js`、`app.js`、`facebook-post.txt` 與 favicon 均回應 HTTP 200。
+- 公開版 390×844 重測 30°粗糙面：臨界角 26.6°、滑行距離 0.93 m、預測吻合；`scrollWidth=clientWidth=390`，主控台 0 個錯誤、無錯誤覆蓋層。
+- 收工閘門重跑：教材檢查 19/19、斜坡物理稽核 59/59、正式 build 通過、套件弱點 0。
